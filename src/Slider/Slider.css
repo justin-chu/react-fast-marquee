@@ -1,0 +1,32 @@
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-3930px); /* 3930px rough width of all images */
+    /* transform: translateX(calc(-400px * 30)); */ /* width * (# slides * 2) */
+  }
+}
+
+.slider {
+  height: 80px;
+  width: 100%;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.slide-track {
+  animation: scroll 200s linear infinite;
+  display: flex;
+  width: max-content;
+}
+
+.slide {
+  height: 50px;
+  /* width: 300px; */
+  margin: 0 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
