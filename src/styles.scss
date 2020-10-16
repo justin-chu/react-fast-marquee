@@ -1,5 +1,37 @@
 .slide-container {
   overflow: hidden;
+  position: relative;
+}
+
+.gradient {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  @mixin white-gradient {
+    background: linear-gradient(to right, var(--gradient-color));
+  }
+
+  &::before,
+  &::after {
+    @include white-gradient;
+    content: "";
+    height: 100%;
+    position: absolute;
+    width: var(--gradient-width);
+    z-index: 2;
+  }
+
+  &::after {
+    right: 0;
+    top: 0;
+    transform: rotateZ(180deg);
+  }
+
+  &::before {
+    left: 0;
+    top: 0;
+  }
 }
 
 .slider {
@@ -14,7 +46,7 @@
     100% {
       transform: translateX(-3930px); /* 3930px rough width of all images */
       /* transform: translateX(calc(-400px * 30)); */ /* width * (# slides * 2) */
-      
+
       // get width of {children} instead
     }
   }
