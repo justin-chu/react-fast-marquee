@@ -1,12 +1,12 @@
 {
   "name": "react-smooth-carousel",
   "version": "1.0.0",
-  "description": "A lightweight smooth carousel",
+  "description": "A lightweight React component for smooth, horizontal-scrolling carousels.",
   "main": "dist/index.js",
   "scripts": {
     "build": "rollup -c",
     "start": "rollup -c -w",
-    "lint": "eslint \"src/**/*.tsx\" --fix --quiet"
+    "lint": "eslint \"src/**/*.{js,tsx}\" --fix --quiet"
   },
   "repository": {
     "type": "git",

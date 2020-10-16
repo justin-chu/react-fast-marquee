@@ -1,6 +1,8 @@
-.slide-container {
+.carousel-container {
   overflow: hidden;
   position: relative;
+  height: var(--height);
+  width: var(--width);
 }
 
 .gradient {
@@ -34,26 +36,27 @@
   }
 }
 
-.slider {
-  animation: scroll var(--speed) linear infinite; // Speed -> default is 200s
-  display: flex;
-  width: max-content;
+.carousel {
+  animation: scroll var(--speed) linear infinite;
+  animation-play-state: var(--play);
 
   @keyframes scroll {
     0% {
       transform: translateX(0);
     }
     100% {
-      transform: translateX(-3930px); /* 3930px rough width of all images */
-      /* transform: translateX(calc(-400px * 30)); */ /* width * (# slides * 2) */
-
-      // get width of {children} instead
+      transform: translateX(var(--direction));
     }
+  }
+
+  &:hover {
+    animation-play-state: var(--pause-on-hover);
+  }
+
+  &:active {
+    animation-play-state: var(--pause-on-click);
   }
 }
 
 .slide {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
