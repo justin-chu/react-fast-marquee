@@ -1,0 +1,32 @@
+.slide-container {
+  overflow: hidden;
+}
+
+.slider {
+  animation: scroll var(--speed) linear infinite; // Speed -> default is 200s
+  display: flex;
+  width: max-content;
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-3930px); /* 3930px rough width of all images */
+      /* transform: translateX(calc(-400px * 30)); */ /* width * (# slides * 2) */
+      
+      // get width of {children} instead
+    }
+  }
+}
+
+// MIGHT NOT NEED
+
+// .slide {
+//   height: 50px;
+//   /* width: 300px; */
+//   margin: 0 30px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }

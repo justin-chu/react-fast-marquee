@@ -1,27 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import { Slider } from './Slider/Slider';
-import { SliderItems } from "./Slider/SliderItems"
+import * as React from 'react'
+import './styles.scss'
 
-ReactDOM.render(
-	<React.StrictMode>
-		<Slider>
-			{SliderItems.map((item, index) => {
-				return (
-					<div className="slide" key={index}>
-						<img height="100%" src={require(`./assets/images/${item.src}`)} alt={item.alt} />
-					</div>
-				);
-			})}
-			{SliderItems.map((item, index) => {
-				return (
-					<div className="slide" key={index}>
-						<img height="100%" src={require(`./assets/images/${item.src}`)} alt={item.alt} />
-					</div>
-				);
-			})}
-		</Slider>
-	</React.StrictMode>,
-	document.getElementById('root')
-);
+interface ISmoothCarouselProps extends React.PropsWithChildren<any> {
+  speed?: number;
+}
+
+const SmoothCarousel: React.FC<ISmoothCarouselProps> = ({
+  speed = 200, // Default props
+  children
+}) => {
+  return (
+    <div className="slide-container">
+      <div style={{ ['--speed' as string]: `${speed}s` }} className="slider">
+        {children}
+      </div>
+    </div>
+  )
+}
+
+export default SmoothCarousel
