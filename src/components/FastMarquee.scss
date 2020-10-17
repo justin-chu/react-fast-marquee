@@ -5,6 +5,14 @@
   flex-direction: row;
   height: var(--height);
   width: var(--width);
+
+  &:hover div {
+    animation-play-state: var(--pause-on-hover);
+  }
+
+  &:active div {
+    animation-play-state: var(--pause-on-click);
+  }
 }
 
 .overlay {
@@ -41,6 +49,7 @@
 .marquee {
   display: flex;
   flex-direction: row;
+  margin-right: var(--margin-right);
   animation: scroll var(--duration) linear var(--delay) infinite;
   animation-play-state: var(--play);
   animation-delay: var(--delay);
@@ -52,13 +61,5 @@
     100% {
       transform: translateX(var(--direction));
     }
-  }
-
-  &:hover {
-    animation-play-state: var(--pause-on-hover);
-  }
-
-  &:active {
-    animation-play-state: var(--pause-on-click);
   }
 }
