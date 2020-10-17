@@ -1,20 +1,17 @@
-# React Smooth Carousel
+# React Fast Marquee
 
-A lightweight React component for smooth, horizontal-scrolling carousels.
+A lightweight React component for building marquees.
 
 ## Demo
 
-
 ## Features
 
-
 ## Installation
+
 ```
 
 ```
 
 ## Usage
 
-
 ## Props
-

@@ -1,7 +1,7 @@
 {
   "name": "react-smooth-carousel",
   "version": "1.0.0",
-  "description": "A lightweight React component for smooth, horizontal-scrolling carousels.",
+  "description": "A lightweight React component for building marquees.",
   "main": "dist/index.js",
   "scripts": {
     "build": "rollup -c",
@@ -46,14 +46,14 @@
     "color": "^3.1.3"
   },
   "husky": {
-      "hooks": {
-          "pre-commit": "lint-staged"
-      }
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
-      "*.{tsx}": [
-          "eslint --fix"
-      ]
+    "*.{tsx}": [
+      "eslint --fix"
+    ]
   },
   "files": [
     "dist"

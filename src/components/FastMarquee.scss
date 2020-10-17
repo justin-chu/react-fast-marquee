@@ -1,11 +1,11 @@
-.carousel-container {
+.marquee-container {
   overflow: hidden;
   position: relative;
   height: var(--height);
   width: var(--width);
 }
 
-.gradient {
+.overlay {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -36,9 +36,12 @@
   }
 }
 
-.carousel {
-  animation: scroll var(--speed) linear infinite;
+.marquee {
+  display: flex;
+  flex-direction: row;
+  animation: scroll var(--duration) linear var(--delay) infinite;
   animation-play-state: var(--play);
+  animation-delay: var(--delay);
 
   @keyframes scroll {
     0% {
@@ -58,5 +61,8 @@
   }
 }
 
-// .slide {
-// }
+.slide {
+  display: flex;
+  width: var(--slide-width);
+  // background-color: red;
+}

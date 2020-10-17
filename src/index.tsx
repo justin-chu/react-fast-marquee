@@ -1,3 +1,3 @@
-import SmoothCarousel from "./components/SmoothCarousel";
+import FastMarquee from "./components/FastMarquee";
 
-export default SmoothCarousel;
+export default FastMarquee;
