@@ -1,6 +1,8 @@
 .marquee-container {
   overflow: hidden;
   position: relative;
+  display: flex;
+  flex-direction: row;
   height: var(--height);
   width: var(--width);
 }
@@ -59,10 +61,4 @@
   &:active {
     animation-play-state: var(--pause-on-click);
   }
-}
-
-.slide {
-  display: flex;
-  width: var(--slide-width);
-  // background-color: red;
 }

@@ -1,5 +1,5 @@
 {
-  "name": "react-smooth-carousel",
+  "name": "react-fast-marquee",
   "version": "1.0.0",
   "description": "A lightweight React component for building marquees.",
   "main": "dist/index.js",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/justin-chu/react-smooth-carousel.git"
+    "url": "git+https://github.com/justin-chu/react-fast-marquee.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/justin-chu/react-smooth-carousel/issues"
+    "url": "https://github.com/justin-chu/react-fast-marquee/issues"
   },
-  "homepage": "https://github.com/justin-chu/react-smooth-carousel#readme",
+  "homepage": "https://github.com/justin-chu/react-fast-marquee#readme",
   "devDependencies": {
     "@types/react": "^16.9.52",
     "@types/react-dom": "^16.9.8",
