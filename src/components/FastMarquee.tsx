@@ -87,10 +87,7 @@ const FastMarquee: React.FC<IFastMarqueeProps> = ({
         ref={marqueeRef}
         style={{
           ["--play" as string]: play ? "running" : "paused",
-          ["--direction" as string]:
-            direction === "left"
-              ? "calc(-100% - var(--margin-right))"
-              : "calc(100% + var(--margin-right))",
+          ["--direction" as string]: direction === "left" ? "normal" : "reverse",
           ["--duration" as string]: `${duration}s`,
           ["--delay" as string]: `${delay}s`,
           ["--margin-right" as string]: `${
@@ -105,10 +102,7 @@ const FastMarquee: React.FC<IFastMarqueeProps> = ({
         // ref={marqueeRef}
         style={{
           ["--play" as string]: play ? "running" : "paused",
-          ["--direction" as string]:
-            direction === "left"
-              ? "calc(-100% - var(--margin-right))"
-              : "calc(100% + var(--margin-right))",
+          ["--direction" as string]: direction === "left" ? "normal" : "reverse",
           ["--duration" as string]: `${duration}s`,
           ["--delay" as string]: `${delay}s`,
           ["--margin-right" as string]: `${

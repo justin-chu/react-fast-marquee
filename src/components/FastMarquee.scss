@@ -53,13 +53,14 @@
   animation: scroll var(--duration) linear var(--delay) infinite;
   animation-play-state: var(--play);
   animation-delay: var(--delay);
+  animation-direction: var(--direction);
 
   @keyframes scroll {
     0% {
       transform: translateX(0);
     }
     100% {
-      transform: translateX(var(--direction));
+      transform: translateX(calc(-100% - var(--margin-right)));
     }
   }
 }
