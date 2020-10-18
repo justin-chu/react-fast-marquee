@@ -19,19 +19,19 @@ interface IMarqueeProps {
   /**
    * Whether to play or pause the marquee
    * Value: boolean
-   * Default: `true`
+   * Default: true
    */
   play?: boolean;
   /**
    * Whether to pause the marquee when hovered
    * Value: boolean
-   * Default: `false`
+   * Default: false
    */
   pauseOnHover?: boolean;
   /**
    * Whether to pause the marquee when clicked
    * Value: boolean
-   * Default: `false`
+   * Default: false
    */
   pauseOnClick?: boolean;
   /**
@@ -73,13 +73,13 @@ interface IMarqueeProps {
   /**
    * The children rendered inside the marquee
    * Value: ReactNode
-   * Default: `null`
+   * Default: null
    */
-  children?: React.ReactNode// React.ReactChild;
+  children?: React.ReactNode;
 }
 
 const Marquee: React.FC<IMarqueeProps> = ({
-  style={},
+  style = {},
   className = "",
   play = true,
   pauseOnHover = false,
