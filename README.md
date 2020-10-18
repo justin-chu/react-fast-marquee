@@ -1,6 +1,6 @@
 # React Fast Marquee
 
-[React Fast Marquee](https://website.com) is a lightweight React component that utilizes CSS animations to create smooth marquees.
+[React Fast Marquee](https://website.com) is a lightweight React component that utilizes the power of CSS animations to create silky smooth marquees.
 
 <!-- [![Build Status](https://travis-ci.org/alampros/react-confetti.svg?branch=master)](https://travis-ci.org/alampros/react-confetti)
 [![npm](https://img.shields.io/npm/v/react-confetti.svg)](https://www.npmjs.com/package/react-confetti)
@@ -46,8 +46,6 @@ Then wrap the `<Marquee>` tags around any component or text you'd like to slide.
 </Marquee>
 ```
 
-This text should now be sliding to the left.
-
 A sample file might look like:
 
 ```jsx
@@ -80,5 +78,5 @@ export default App;
 | `delay`         | `number`                    | `0`               | Duration to delay the animation after render, in seconds |
 | `gradient`      | `boolean`                   | `true`            | Whether to show the gradient or not                      |
 | `gradientColor` | `Array<number>` of length 3 | `[255, 255, 255]` | The rgb color of the gradient as an array of length 3    |
-| `gradientWidth` | `number`                    | `200`             | The width of the gradient on either side, in pixels      |
+| `gradientWidth` | `number or string`          | `200`             | The width of the gradient on either side                 |
 | `children`      | `ReactNode`                 | `null`            | The children rendered inside the marquee                 |

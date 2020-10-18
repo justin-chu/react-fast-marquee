@@ -63,11 +63,11 @@ interface IMarqueeProps {
    */
   gradientColor?: string;
   /**
-   * The width of the gradient on either side, in pixels
-   * Value: number
+   * The width of the gradient on either side
+   * Value: number or string
    * Default: 200
    */
-  gradientWidth?: number;
+  gradientWidth?: number | string;
   /**
    * The children rendered inside the marquee
    * Value: ReactNode
@@ -126,7 +126,7 @@ const Marquee: React.FC<IMarqueeProps> = ({
         <div
           style={{
             ["--gradient-color" as string]: `${rgbaGradientColor}, 1), ${rgbaGradientColor}, 0)`,
-            ["--gradient-width" as string]: `${gradientWidth}px`,
+            ["--gradient-width" as string]: typeof gradientWidth === "number" ? `${gradientWidth}px` : gradientWidth
           }}
           className="overlay"
         />
