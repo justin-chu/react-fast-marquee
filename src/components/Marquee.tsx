@@ -1,8 +1,6 @@
 import * as React from "react";
 import "./Marquee.scss";
 
-const Color = require("color");
-
 interface IMarqueeProps {
   /**
    * Inline styling for the container
@@ -57,11 +55,11 @@ interface IMarqueeProps {
    * Value: boolean
    * Default: true
    */
-  gradient?: boolean;
+  gradient?: Array<number>;
   /**
-   * The color of the gradient
-   * Value: string
-   * Default: "white"
+   * The color of the gradient in rgb format as an array of length 3
+   * Value: Array<number> of length 3
+   * Default: [255, 255, 255]
    */
   gradientColor?: string;
   /**
@@ -88,12 +86,10 @@ const Marquee: React.FC<IMarqueeProps> = ({
   speed = 20,
   delay = 0,
   gradient = true,
-  gradientColor = "white",
+  gradientColor = [255, 255, 255],
   gradientWidth = 200,
   children,
 }) => {
-  const color = Color(gradientColor);
-
   /* React Hooks */
   const [containerWidth, setContainerWidth] = React.useState(0);
   const [marqueeWidth, setMarqueeWidth] = React.useState(0);
@@ -113,6 +109,9 @@ const Marquee: React.FC<IMarqueeProps> = ({
     setDuration(marqueeWidth / speed);
   });
 
+  // Gradient color in an unfinished rgba format
+  const rgbaGradientColor = `rgba(${gradientColor[0]}, ${gradientColor[1]}, ${gradientColor[2]}`;
+
   return (
     <div
       ref={containerRef}
@@ -126,7 +125,7 @@ const Marquee: React.FC<IMarqueeProps> = ({
       {gradient && (
         <div
           style={{
-            ["--gradient-color" as string]: `${color}, ${color.fade(1)}`,
+            ["--gradient-color" as string]: `${rgbaGradientColor}, 1), ${rgbaGradientColor}, 0)`,
             ["--gradient-width" as string]: `${gradientWidth}px`,
           }}
           className="overlay"
