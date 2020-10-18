@@ -46,7 +46,7 @@ Then wrap the `<Marquee>` tags around any component or text you'd like to slide.
 </Marquee>
 ```
 
-A sample file might look like:
+A sample file might look like this:
 
 ```jsx
 import React from "react";
@@ -67,9 +67,10 @@ export default App;
 ## Props
 
 | Property        | Type                        | Default           | Description                                              |
-| --------------- | --------------------------- | ----------------- | -------------------------------------------------------- |
+| :-------------- | :-------------------------- | :---------------- | :------------------------------------------------------- |
 | `style`         | `object`                    | `{}`              | Inline style for the container div                       |
-| `className`     | `string`                    | `""`              | Class name to style the container div                    |
+| `className`     | `string`                    | `""`              | Name of the css class to style the container div         |
+| div             |
 | `play`          | `boolean`                   | `true`            | Whether to play or pause the marquee                     |
 | `pauseOnHover`  | `boolean`                   | `false`           | Whether to pause the marquee when hovered                |
 | `pauseOnClick`  | `boolean`                   | `false`           | Whether to pause the marquee when clicked                |

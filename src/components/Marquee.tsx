@@ -4,73 +4,73 @@ import "./Marquee.scss";
 interface IMarqueeProps {
   /**
    * Inline style for the container div
-   * Value: object
+   * Type: object
    * Default: {}
    */
   style?: React.CSSProperties;
   /**
    * Class name to style the container div
-   * Value: string
+   * Type: string
    * Default: ""
    */
   className?: string;
   /**
    * Whether to play or pause the marquee
-   * Value: boolean
+   * Type: boolean
    * Default: true
    */
   play?: boolean;
   /**
    * Whether to pause the marquee when hovered
-   * Value: boolean
+   * Type: boolean
    * Default: false
    */
   pauseOnHover?: boolean;
   /**
    * Whether to pause the marquee when clicked
-   * Value: boolean
+   * Type: boolean
    * Default: false
    */
   pauseOnClick?: boolean;
   /**
    * The direction the marquee is sliding
-   * Value: "left" or "right"
+   * Type: "left" or "right"
    * Default: "left"
    */
   direction: "left" | "right";
   /**
    * Speed calculated as pixels/second
-   * Value: number
+   * Type: number
    * Default: 20
    */
   speed?: number;
   /**
    * Duration to delay the animation after render, in seconds
-   * Value: number
+   * Type: number
    * Default: 0
    */
   delay?: number;
   /**
    * Whether to show the gradient or not
-   * Value: boolean
+   * Type: boolean
    * Default: true
    */
   gradient?: Array<number>;
   /**
    * The rgb color of the gradient as an array of length 3
-   * Value: Array<number> of length 3
+   * Type: Array<number> of length 3
    * Default: [255, 255, 255]
    */
   gradientColor?: string;
   /**
    * The width of the gradient on either side
-   * Value: number or string
+   * Type: number or string
    * Default: 200
    */
   gradientWidth?: number | string;
   /**
    * The children rendered inside the marquee
-   * Value: ReactNode
+   * Type: ReactNode
    * Default: null
    */
   children?: React.ReactNode;
@@ -101,8 +101,8 @@ const Marquee: React.FC<IMarqueeProps> = ({
   React.useEffect(() => {
     /* Find width of container and width of marquee */
     if (marqueeRef.current && containerRef.current) {
-      setContainerWidth(containerRef.current.offsetWidth);
-      setMarqueeWidth(marqueeRef.current.offsetWidth);
+      setContainerWidth(containerRef.current.getBoundingClientRect().width);
+      setMarqueeWidth(marqueeRef.current.getBoundingClientRect().width);
     }
 
     /* Set duration of animation based off speed */
