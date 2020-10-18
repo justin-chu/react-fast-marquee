@@ -3,13 +3,13 @@ import "./Marquee.scss";
 
 interface IMarqueeProps {
   /**
-   * Inline styling for the container
-   * Value: React inline style object
+   * Inline style for the container div
+   * Value: object
    * Default: {}
    */
   style?: React.CSSProperties;
   /**
-   * Class name to optionally style the container
+   * Class name to style the container div
    * Value: string
    * Default: ""
    */
@@ -45,7 +45,7 @@ interface IMarqueeProps {
    */
   speed?: number;
   /**
-   * Duration to delay the animation, in seconds
+   * Duration to delay the animation after render, in seconds
    * Value: number
    * Default: 0
    */
@@ -57,15 +57,15 @@ interface IMarqueeProps {
    */
   gradient?: Array<number>;
   /**
-   * The color of the gradient in rgb format as an array of length 3
+   * The rgb color of the gradient as an array of length 3
    * Value: Array<number> of length 3
    * Default: [255, 255, 255]
    */
   gradientColor?: string;
   /**
-   * The width of the gradient, in pixels
+   * The width of the gradient on either side, in pixels
    * Value: number
-   * Default: "white"
+   * Default: 200
    */
   gradientWidth?: number;
   /**
