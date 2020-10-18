@@ -1,46 +1,100 @@
 import * as React from "react";
-import "./FastMarquee.scss";
+import "./Marquee.scss";
 
 const Color = require("color");
 
-interface IFastMarqueeProps extends React.PropsWithChildren<any> {
+interface IMarqueeProps {
+  /**
+   * Inline styling for the container
+   * Value: React inline style object
+   * Default: {}
+   */
   style?: React.CSSProperties;
+  /**
+   * Class name to optionally style the container
+   * Value: string
+   * Default: ""
+   */
+  className?: string;
+  /**
+   * Whether to play or pause the marquee
+   * Value: boolean
+   * Default: `true`
+   */
   play?: boolean;
+  /**
+   * Whether to pause the marquee when hovered
+   * Value: boolean
+   * Default: `false`
+   */
   pauseOnHover?: boolean;
+  /**
+   * Whether to pause the marquee when clicked
+   * Value: boolean
+   * Default: `false`
+   */
   pauseOnClick?: boolean;
-  direction: "left" | "right"; // Possibly add "up" and "down" in the future
-  speed?: number; // Speed in pixels/second
-  loop?: boolean; // Doesn't work yet
+  /**
+   * The direction the marquee is sliding
+   * Value: "left" or "right"
+   * Default: "left"
+   */
+  direction: "left" | "right";
+  /**
+   * Speed calculated as pixels/second
+   * Value: number
+   * Default: 20
+   */
+  speed?: number;
+  /**
+   * Duration to delay the animation, in seconds
+   * Value: number
+   * Default: 0
+   */
   delay?: number;
-  height?: number | string; // Height and width might be redundant because style covers them
-  width?: number | string;
-  // carouselRepeat?: number;
+  /**
+   * Whether to show the gradient or not
+   * Value: boolean
+   * Default: true
+   */
   gradient?: boolean;
+  /**
+   * The color of the gradient
+   * Value: string
+   * Default: "white"
+   */
   gradientColor?: string;
-  gradientWidth?: number; // Number or string in the future
-  // swipeable?: boolean;
+  /**
+   * The width of the gradient, in pixels
+   * Value: number
+   * Default: "white"
+   */
+  gradientWidth?: number;
+  /**
+   * The children rendered inside the marquee
+   * Value: ReactNode
+   * Default: `null`
+   */
+  children?: React.ReactNode// React.ReactChild;
 }
 
-const FastMarquee: React.FC<IFastMarqueeProps> = ({
-  style = {},
-  // className = "",
+const Marquee: React.FC<IMarqueeProps> = ({
+  style={},
+  className = "",
   play = true,
   pauseOnHover = false,
   pauseOnClick = false,
   direction = "left",
-  speed = 50,
-  // loop = true, // Todo: Get width of marquee, repeat marquee until equal or greather than width of marquee-container
+  speed = 20,
   delay = 0,
-  height = "100%",
-  width = "100%",
-  // carouselRepeat = 2,
   gradient = true,
   gradientColor = "white",
   gradientWidth = 200,
-  // swipeable = false,
   children,
 }) => {
   const color = Color(gradientColor);
+
+  /* React Hooks */
   const [containerWidth, setContainerWidth] = React.useState(0);
   const [marqueeWidth, setMarqueeWidth] = React.useState(0);
   const [duration, setDuration] = React.useState(0);
@@ -49,30 +103,25 @@ const FastMarquee: React.FC<IFastMarqueeProps> = ({
   const marqueeRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    // Make sure refs are not null
+    /* Find width of container and width of marquee */
     if (marqueeRef.current && containerRef.current) {
-      setContainerWidth(containerRef.current.getBoundingClientRect().width);
-      setMarqueeWidth(marqueeRef.current.getBoundingClientRect().width);
+      setContainerWidth(containerRef.current.offsetWidth);
+      setMarqueeWidth(marqueeRef.current.offsetWidth);
     }
-    getDuration();
-  });
 
-  const getDuration = () => {
+    /* Set duration of animation based off speed */
     setDuration(marqueeWidth / speed);
-  };
+  });
 
   return (
     <div
       ref={containerRef}
       style={{
         ...style,
-        ["--height" as string]:
-          typeof height === "string" ? height : `${height}px`,
-        ["--width" as string]: typeof width === "string" ? width : `${width}px`,
         ["--pause-on-hover" as string]: pauseOnHover ? "paused" : "running",
         ["--pause-on-click" as string]: pauseOnClick ? "paused" : "running",
       }}
-      className="marquee-container"
+      className={className + " marquee-container"}
     >
       {gradient && (
         <div
@@ -87,7 +136,8 @@ const FastMarquee: React.FC<IFastMarqueeProps> = ({
         ref={marqueeRef}
         style={{
           ["--play" as string]: play ? "running" : "paused",
-          ["--direction" as string]: direction === "left" ? "normal" : "reverse",
+          ["--direction" as string]:
+            direction === "left" ? "normal" : "reverse",
           ["--duration" as string]: `${duration}s`,
           ["--delay" as string]: `${delay}s`,
           ["--margin-right" as string]: `${
@@ -99,10 +149,10 @@ const FastMarquee: React.FC<IFastMarqueeProps> = ({
         {children}
       </div>
       <div
-        // ref={marqueeRef}
         style={{
           ["--play" as string]: play ? "running" : "paused",
-          ["--direction" as string]: direction === "left" ? "normal" : "reverse",
+          ["--direction" as string]:
+            direction === "left" ? "normal" : "reverse",
           ["--duration" as string]: `${duration}s`,
           ["--delay" as string]: `${delay}s`,
           ["--margin-right" as string]: `${
@@ -117,4 +167,4 @@ const FastMarquee: React.FC<IFastMarqueeProps> = ({
   );
 };
 
-export default FastMarquee;
+export default Marquee;

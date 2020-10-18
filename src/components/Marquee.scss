@@ -1,10 +1,10 @@
 .marquee-container {
-  overflow: hidden;
+  overflow-x: hidden !important;
+  display: flex !important;
+  flex-direction: row !important;
   position: relative;
-  display: flex;
-  flex-direction: row;
-  height: var(--height);
-  width: var(--width);
+  height: 100%;
+  width: 100%;
 
   &:hover div {
     animation-play-state: var(--pause-on-hover);
@@ -20,13 +20,13 @@
   width: 100%;
   height: 100%;
 
-  @mixin white-gradient {
+  @mixin gradient {
     background: linear-gradient(to right, var(--gradient-color));
   }
 
   &::before,
   &::after {
-    @include white-gradient;
+    @include gradient;
     content: "";
     height: 100%;
     position: absolute;

@@ -1,3 +1,3 @@
-import FastMarquee from "./components/FastMarquee";
+import Marquee from "./components/Marquee";
 
-export default FastMarquee;
+export default Marquee;
