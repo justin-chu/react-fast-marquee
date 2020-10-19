@@ -1,20 +1,19 @@
 # React Fast Marquee
 
-[React Fast Marquee](https://website.com) is a lightweight React component that utilizes the power of CSS animations to create silky smooth marquees.
+[React Fast Marquee](https://www.react-fast-marquee.com) is a lightweight React component that utilizes the power of CSS animations to create silky smooth marquees.
 
-<!-- [![Build Status](https://travis-ci.org/alampros/react-confetti.svg?branch=master)](https://travis-ci.org/alampros/react-confetti)
-[![npm](https://img.shields.io/npm/v/react-confetti.svg)](https://www.npmjs.com/package/react-confetti)
-[![npm bundle size](https://img.shields.io/bundlephobia/min/react-confetti.svg)](https://bundlephobia.com/result?p=react-confetti)
-![npm type definitions](https://img.shields.io/npm/types/react-confetti.svg) -->
+[![npm](https://img.shields.io/npm/v/react-fast-marquee.svg)](https://www.npmjs.com/package/react-fast-marquee)
+[![npm bundle size](https://img.shields.io/bundlephobia/min/react-fast-marquee.svg)](https://bundlephobia.com/result?p=react-fast-marquee)
+![npm type definitions](https://img.shields.io/npm/types/react-fast-marquee.svg)
 
-<!-- [![demogif][2]][1]
+[![demogif][2]][1]
 
-[1]: http://alampros.github.com/react-confetti
-[2]: http://alampros.github.io/react-confetti/confetti-demo-anim.gif (demo gif) -->
+[1]: https://website.com
+[2]: https://gifyu.com/image/8vqf "demo gif"
 
 ## Demo
 
-Check out the demo [here](https://website.com) and play around with some sample marquees.
+Check out the demo [here](https://www.react-fast-marquee.com) and play around with some sample marquees.
 
 ## Installation
 
