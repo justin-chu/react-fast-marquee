@@ -31,7 +31,7 @@ yarn add react-fast-marquee
 
 ## Usage
 
-To use the component, first import it into your file:
+To use the component, first import `Marquee` into your file:
 
 ```jsx
 import Marquee from "react-fast-marquee";
@@ -69,7 +69,6 @@ export default App;
 | :-------------- | :-------------------------- | :---------------- | :------------------------------------------------------- |
 | `style`         | `object`                    | `{}`              | Inline style for the container div                       |
 | `className`     | `string`                    | `""`              | Name of the css class to style the container div         |
-| div             |
 | `play`          | `boolean`                   | `true`            | Whether to play or pause the marquee                     |
 | `pauseOnHover`  | `boolean`                   | `false`           | Whether to pause the marquee when hovered                |
 | `pauseOnClick`  | `boolean`                   | `false`           | Whether to pause the marquee when clicked                |
