@@ -1,6 +1,6 @@
 {
   "name": "react-fast-marquee",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A lightweight React component that utilizes the power of CSS animations to create silky smooth marquees.",
   "main": "dist/index.js",
   "scripts": {
@@ -8,7 +8,10 @@
     "start": "rollup -c -w",
     "lint": "eslint \"src/**/*.{js,tsx}\" --fix --quiet"
   },
-  "repository": "git+https://github.com/justin-chu/react-fast-marquee.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justin-chu/react-fast-marquee.git"
+  },
   "keywords": [
     "react",
     "marquee",
@@ -60,5 +63,8 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "directories": {
+    "example": "examples"
+  }
 }
