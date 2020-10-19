@@ -3,8 +3,10 @@
 [React Fast Marquee](https://www.react-fast-marquee.com) is a lightweight React component that utilizes the power of CSS animations to create silky smooth marquees.
 
 [![npm](https://img.shields.io/npm/v/react-fast-marquee.svg)](https://www.npmjs.com/package/react-fast-marquee)
+[![npm downloads](https://img.shields.io/npm/dw/react-fast-marquee.svg)](https://www.npmjs.com/package/react-fast-marquee)
+[![npm license](https://img.shields.io/npm/l/react-fast-marquee.svg)](https://www.npmjs.com/package/react-fast-marquee)
 [![npm bundle size](https://img.shields.io/bundlephobia/min/react-fast-marquee.svg)](https://bundlephobia.com/result?p=react-fast-marquee)
-![npm type definitions](https://img.shields.io/npm/types/react-fast-marquee.svg)
+[![npm type definitions](https://img.shields.io/npm/types/react-fast-marquee.svg)](https://www.npmjs.com/package/react-fast-marquee)
 
 [![demogif][2]][1]
 
