@@ -8,7 +8,8 @@
 
 [![demogif][2]][1]
 
-<img src="https://www.react-fast-marquee.com" data-canonical-src="https://media.giphy.com/media/6ritiN2cpvpsyz4fo6/giphy.gif" height="100" />
+[1]: https://www.react-fast-marquee.com
+[2]: https://media.giphy.com/media/6ritiN2cpvpsyz4fo6/giphy.gif "demo gif"
 
 ## Demo
 
