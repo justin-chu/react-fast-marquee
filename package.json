@@ -1,7 +1,7 @@
 {
   "name": "react-fast-marquee",
   "version": "1.0.0",
-  "description": "A lightweight React component for building marquees.",
+  "description": "A lightweight React component that utilizes the power of CSS animations to create silky smooth marquees.",
   "main": "dist/index.js",
   "scripts": {
     "build": "rollup -c",
@@ -12,9 +12,9 @@
     "type": "git",
     "url": "git+https://github.com/justin-chu/react-fast-marquee.git"
   },
-  "keywords": [],
+  "keywords": ["react", "marquee", "react-component", "reactjs", "carousel", "slider", "horizontal-scrolling-carousels"],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/justin-chu/react-fast-marquee/issues"
   },
