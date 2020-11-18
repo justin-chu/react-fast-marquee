@@ -55,7 +55,7 @@ interface IMarqueeProps {
    * Type: boolean
    * Default: true
    */
-  gradient?: Array<number>;
+  gradient?: boolean;
   /**
    * The rgb color of the gradient as an array of length 3
    * Type: Array<number> of length 3
