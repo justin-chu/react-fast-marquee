@@ -37,7 +37,7 @@ interface IMarqueeProps {
    * Type: "left" or "right"
    * Default: "left"
    */
-  direction: "left" | "right";
+  direction?: "left" | "right";
   /**
    * Speed calculated as pixels/second
    * Type: number
