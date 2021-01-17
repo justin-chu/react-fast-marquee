@@ -1,7 +1,7 @@
 import * as React from "react";
 import "./Marquee.scss";
 
-interface IMarqueeProps {
+interface MarqueeProps {
   /**
    * Inline style for the container div
    * Type: object
@@ -64,7 +64,7 @@ interface IMarqueeProps {
   gradientColor?: string;
   /**
    * The width of the gradient on either side
-   * Type: number or string
+   * Type: string
    * Default: 200
    */
   gradientWidth?: number | string;
@@ -76,7 +76,7 @@ interface IMarqueeProps {
   children?: React.ReactNode;
 }
 
-const Marquee: React.FC<IMarqueeProps> = ({
+const Marquee: React.FC<MarqueeProps> = ({
   style = {},
   className = "",
   play = true,
@@ -126,7 +126,10 @@ const Marquee: React.FC<IMarqueeProps> = ({
         <div
           style={{
             ["--gradient-color" as string]: `${rgbaGradientColor}, 1), ${rgbaGradientColor}, 0)`,
-            ["--gradient-width" as string]: typeof gradientWidth === "number" ? `${gradientWidth}px` : gradientWidth
+            ["--gradient-width" as string]:
+              typeof gradientWidth === "number"
+                ? `${gradientWidth}px`
+                : gradientWidth,
           }}
           className="overlay"
         />
