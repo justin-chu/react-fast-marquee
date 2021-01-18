@@ -27,6 +27,9 @@ jobs:
           name: Build code
           command: yarn build
 
+      - codecov/upload:
+          file: "./coverage/clover.xml"
+
 workflows:
   sample:
     jobs:

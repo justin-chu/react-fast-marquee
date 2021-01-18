@@ -35,7 +35,9 @@
     "automock": false,
     "setupFiles": [
       "./__tests__/setupJest.js"
-    ]
+    ],
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
   },
   "repository": {
     "type": "git",
