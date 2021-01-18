@@ -25,3 +25,8 @@ jobs:
       - run:
           name: Build code
           command: yarn build
+
+workflows:
+  sample:
+    jobs:
+      - build-and-test
