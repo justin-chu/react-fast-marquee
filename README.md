@@ -5,6 +5,7 @@
 [![npm](https://img.shields.io/npm/v/react-fast-marquee.svg)](https://www.npmjs.com/package/react-fast-marquee)
 [![npm downloads](https://img.shields.io/npm/dt/react-fast-marquee.svg)](https://www.npmjs.com/package/react-fast-marquee)
 [![justin-chu](https://circleci.com/gh/justin-chu/react-fast-marquee.svg?style=svg)](https://circleci.com/gh/justin-chu/react-fast-marquee)
+[![codecov](https://codecov.io/gh/justin-chu/react-fast-marquee/branch/master/graph/badge.svg?token=52Q4YZYFME)](https://codecov.io/gh/justin-chu/react-fast-marquee)
 [![npm license](https://img.shields.io/npm/l/react-fast-marquee.svg)](https://www.npmjs.com/package/react-fast-marquee)
 [![npm bundle size](https://img.shields.io/bundlephobia/min/react-fast-marquee.svg)](https://bundlephobia.com/result?p=react-fast-marquee)
 [![npm type definitions](https://img.shields.io/npm/types/react-fast-marquee.svg)](https://www.npmjs.com/package/react-fast-marquee)
