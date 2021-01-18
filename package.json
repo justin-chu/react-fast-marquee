@@ -109,7 +109,5 @@
   "directories": {
     "example": "examples"
   },
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.11.9"
-  }
+  "dependencies": {}
 }
