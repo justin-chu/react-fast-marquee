@@ -105,8 +105,11 @@ const Marquee: React.FC<MarqueeProps> = ({
       setMarqueeWidth(marqueeRef.current.getBoundingClientRect().width);
     }
 
-    /* Set duration of animation based off speed */
-    setDuration(marqueeWidth / speed);
+    if (marqueeWidth < containerWidth) {
+      setDuration(containerWidth / speed);
+    } else {
+      setDuration(marqueeWidth / speed);
+    }
   });
 
   // Gradient color in an unfinished rgba format
