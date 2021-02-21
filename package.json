@@ -108,6 +108,5 @@
   ],
   "directories": {
     "example": "examples"
-  },
-  "dependencies": {}
+  }
 }

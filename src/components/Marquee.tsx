@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { Fragment, useEffect, useState, useRef } from "react";
 import "./Marquee.scss";
 
 interface MarqueeProps {
@@ -91,14 +91,18 @@ const Marquee: React.FC<MarqueeProps> = ({
   children,
 }) => {
   /* React Hooks */
-  const [containerWidth, setContainerWidth] = React.useState(0);
-  const [marqueeWidth, setMarqueeWidth] = React.useState(0);
-  const [duration, setDuration] = React.useState(0);
+  const [containerWidth, setContainerWidth] = useState(0);
+  const [marqueeWidth, setMarqueeWidth] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const marqueeRef = useRef<HTMLDivElement>(null);
 
-  const containerRef = React.useRef<HTMLDivElement>(null);
-  const marqueeRef = React.useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     /* Find width of container and width of marquee */
     if (marqueeRef.current && containerRef.current) {
       setContainerWidth(containerRef.current.getBoundingClientRect().width);
@@ -116,59 +120,67 @@ const Marquee: React.FC<MarqueeProps> = ({
   const rgbaGradientColor = `rgba(${gradientColor[0]}, ${gradientColor[1]}, ${gradientColor[2]}`;
 
   return (
-    <div
-      ref={containerRef}
-      style={{
-        ...style,
-        ["--pause-on-hover" as string]: pauseOnHover ? "paused" : "running",
-        ["--pause-on-click" as string]: pauseOnClick ? "paused" : "running",
-      }}
-      className={className + " marquee-container"}
-    >
-      {gradient && (
+    <Fragment>
+      {!isMounted ? null : (
         <div
+          ref={containerRef}
           style={{
-            ["--gradient-color" as string]: `${rgbaGradientColor}, 1), ${rgbaGradientColor}, 0)`,
-            ["--gradient-width" as string]:
-              typeof gradientWidth === "number"
-                ? `${gradientWidth}px`
-                : gradientWidth,
+            ...style,
+            ["--pause-on-hover" as string]: pauseOnHover ? "paused" : "running",
+            ["--pause-on-click" as string]: pauseOnClick ? "paused" : "running",
           }}
-          className="overlay"
-        />
+          className={className + " marquee-container"}
+        >
+          {gradient && (
+            <div
+              style={{
+                ["--gradient-color" as string]: `${rgbaGradientColor}, 1), ${rgbaGradientColor}, 0)`,
+                ["--gradient-width" as string]:
+                  typeof gradientWidth === "number"
+                    ? `${gradientWidth}px`
+                    : gradientWidth,
+              }}
+              className="overlay"
+            />
+          )}
+          <div
+            ref={marqueeRef}
+            style={{
+              ["--play" as string]: play ? "running" : "paused",
+              ["--direction" as string]:
+                direction === "left" ? "normal" : "reverse",
+              ["--duration" as string]: `${duration}s`,
+              ["--delay" as string]: `${delay}s`,
+              ["--margin-right" as string]: `${
+                marqueeWidth < containerWidth
+                  ? containerWidth - marqueeWidth
+                  : 0
+              }px`,
+            }}
+            className="marquee"
+          >
+            {children}
+          </div>
+          <div
+            style={{
+              ["--play" as string]: play ? "running" : "paused",
+              ["--direction" as string]:
+                direction === "left" ? "normal" : "reverse",
+              ["--duration" as string]: `${duration}s`,
+              ["--delay" as string]: `${delay}s`,
+              ["--margin-right" as string]: `${
+                marqueeWidth < containerWidth
+                  ? containerWidth - marqueeWidth
+                  : 0
+              }px`,
+            }}
+            className="marquee"
+          >
+            {children}
+          </div>
+        </div>
       )}
-      <div
-        ref={marqueeRef}
-        style={{
-          ["--play" as string]: play ? "running" : "paused",
-          ["--direction" as string]:
-            direction === "left" ? "normal" : "reverse",
-          ["--duration" as string]: `${duration}s`,
-          ["--delay" as string]: `${delay}s`,
-          ["--margin-right" as string]: `${
-            marqueeWidth < containerWidth ? containerWidth - marqueeWidth : 0
-          }px`,
-        }}
-        className="marquee"
-      >
-        {children}
-      </div>
-      <div
-        style={{
-          ["--play" as string]: play ? "running" : "paused",
-          ["--direction" as string]:
-            direction === "left" ? "normal" : "reverse",
-          ["--duration" as string]: `${duration}s`,
-          ["--delay" as string]: `${delay}s`,
-          ["--margin-right" as string]: `${
-            marqueeWidth < containerWidth ? containerWidth - marqueeWidth : 0
-          }px`,
-        }}
-        className="marquee"
-      >
-        {children}
-      </div>
-    </div>
+    </Fragment>
   );
 };
 
