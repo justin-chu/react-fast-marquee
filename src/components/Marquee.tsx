@@ -61,7 +61,7 @@ interface MarqueeProps {
    * Type: Array<number> of length 3
    * Default: [255, 255, 255]
    */
-  gradientColor?: string;
+  gradientColor?: [number, number, number];
   /**
    * The width of the gradient on either side
    * Type: string
