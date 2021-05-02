@@ -3,7 +3,6 @@
   display: flex !important;
   flex-direction: row !important;
   position: relative;
-  height: 100%;
   width: 100%;
 
   &:hover div {
@@ -47,9 +46,12 @@
 }
 
 .marquee {
+  flex: 0 0 auto;
+  min-width: 100%;
+  z-index: 1;
   display: flex;
   flex-direction: row;
-  margin-right: var(--margin-right);
+  align-items: center;
   animation: scroll var(--duration) linear var(--delay) infinite;
   animation-play-state: var(--play);
   animation-delay: var(--delay);
@@ -57,10 +59,10 @@
 
   @keyframes scroll {
     0% {
-      transform: translateX(0);
+      transform: translateX(0%);
     }
     100% {
-      transform: translateX(calc(-100% - var(--margin-right)));
+      transform: translateX(-100%);
     }
   }
 }

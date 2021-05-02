@@ -90,7 +90,7 @@ const Marquee: React.FC<MarqueeProps> = ({
   gradientWidth = 200,
   children,
 }) => {
-  /* React Hooks */
+  // React Hooks
   const [containerWidth, setContainerWidth] = useState(0);
   const [marqueeWidth, setMarqueeWidth] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -98,12 +98,8 @@ const Marquee: React.FC<MarqueeProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  useEffect(() => {
-    /* Find width of container and width of marquee */
+  const calculateWidth = () => {
+    // Find width of container and width of marquee
     if (marqueeRef.current && containerRef.current) {
       setContainerWidth(containerRef.current.getBoundingClientRect().width);
       setMarqueeWidth(marqueeRef.current.getBoundingClientRect().width);
@@ -114,7 +110,20 @@ const Marquee: React.FC<MarqueeProps> = ({
     } else {
       setDuration(marqueeWidth / speed);
     }
+  };
+
+  useEffect(() => {
+    calculateWidth();
+    // Rerender on window resize
+    window.addEventListener("resize", calculateWidth);
+    return () => {
+      window.removeEventListener("resize", calculateWidth);
+    };
   });
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Gradient color in an unfinished rgba format
   const rgbaGradientColor = `rgba(${gradientColor[0]}, ${gradientColor[1]}, ${gradientColor[2]}`;
@@ -151,11 +160,6 @@ const Marquee: React.FC<MarqueeProps> = ({
                 direction === "left" ? "normal" : "reverse",
               ["--duration" as string]: `${duration}s`,
               ["--delay" as string]: `${delay}s`,
-              ["--margin-right" as string]: `${
-                marqueeWidth < containerWidth
-                  ? containerWidth - marqueeWidth
-                  : 0
-              }px`,
             }}
             className="marquee"
           >
@@ -168,11 +172,6 @@ const Marquee: React.FC<MarqueeProps> = ({
                 direction === "left" ? "normal" : "reverse",
               ["--duration" as string]: `${duration}s`,
               ["--delay" as string]: `${delay}s`,
-              ["--margin-right" as string]: `${
-                marqueeWidth < containerWidth
-                  ? containerWidth - marqueeWidth
-                  : 0
-              }px`,
             }}
             className="marquee"
           >
