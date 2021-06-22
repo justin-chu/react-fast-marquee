@@ -51,6 +51,12 @@ interface MarqueeProps {
    */
   delay?: number;
   /**
+   * The number of times the marquee should loop, 0 is equivalent to infinite
+   * Type: number
+   * Default: 0
+   */
+  loop?: number;
+  /**
    * Whether to show the gradient or not
    * Type: boolean
    * Default: true
@@ -74,12 +80,6 @@ interface MarqueeProps {
    * Default: null
    */
   children?: React.ReactNode;
-  /**
-   * The number of times the marquee should loop, 0 is equivalent to infinite
-   * Type: number
-   * Default: 0
-   */
-   loop?: number;
 }
 
 const Marquee: React.FC<MarqueeProps> = ({
@@ -91,11 +91,11 @@ const Marquee: React.FC<MarqueeProps> = ({
   direction = "left",
   speed = 20,
   delay = 0,
+  loop = 0,
   gradient = true,
   gradientColor = [255, 255, 255],
   gradientWidth = 200,
   children,
-  loop = 0
 }) => {
   // React Hooks
   const [containerWidth, setContainerWidth] = useState(0);

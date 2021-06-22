@@ -79,8 +79,9 @@ export default App;
 | `direction`     | `"left"` or `"right"`       | `"left"`          | The direction the marquee is sliding                     |
 | `speed`         | `number`                    | `20`              | Speed calculated as pixels/second                        |
 | `delay`         | `number`                    | `0`               | Duration to delay the animation after render, in seconds |
+| `loop`          | `number`                    | `0`               | The number of times the marquee should loop, 0 is equivalent to infinite         |
 | `gradient`      | `boolean`                   | `true`            | Whether to show the gradient or not                      |
 | `gradientColor` | `Array<number>` of length 3 | `[255, 255, 255]` | The rgb color of the gradient as an array of length 3    |
 | `gradientWidth` | `number or string`          | `200`             | The width of the gradient on either side                 |
 | `children`      | `ReactNode`                 | `null`            | The children rendered inside the marquee                 |
-| `loop`          | `number`                    | `0`               | The number of times the marquee should loop, 0 is equivalent to infinite         |
+
