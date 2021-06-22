@@ -83,4 +83,4 @@ export default App;
 | `gradientColor` | `Array<number>` of length 3 | `[255, 255, 255]` | The rgb color of the gradient as an array of length 3    |
 | `gradientWidth` | `number or string`          | `200`             | The width of the gradient on either side                 |
 | `children`      | `ReactNode`                 | `null`            | The children rendered inside the marquee                 |
-| `loop`          | `number`                    | `0`               | The number of loops, 0 is equivalent to infinite                 |
+| `loop`          | `number`                    | `0`               | The number of loops, 0 is equivalent to infinite         |
