@@ -75,8 +75,8 @@ interface MarqueeProps {
    */
   children?: React.ReactNode;
   /**
-   * The number of loops, 0 is equivalent to infinite
-   * Type: boolean
+   * The number of times the marquee should loop, 0 is equivalent to infinite
+   * Type: number
    * Default: 0
    */
    loop?: number;
@@ -180,6 +180,7 @@ const Marquee: React.FC<MarqueeProps> = ({
                 direction === "left" ? "normal" : "reverse",
               ["--duration" as string]: `${duration}s`,
               ["--delay" as string]: `${delay}s`,
+              ["--iteration-count" as string]: !!loop ? `${loop}` : "infinite",
             }}
             className="marquee"
           >
