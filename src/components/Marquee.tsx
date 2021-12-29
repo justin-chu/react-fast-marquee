@@ -126,7 +126,7 @@ const Marquee: React.FC<MarqueeProps> = ({
     return () => {
       window.removeEventListener("resize", calculateWidth);
     };
-  });
+  }, []);
 
   useEffect(() => {
     setIsMounted(true);
