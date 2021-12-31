@@ -75,13 +75,13 @@ interface MarqueeProps {
    */
   gradientWidth?: number | string;
   /**
-   * A callback for when the marquee finishes scrolling. Only calls if loop is non-zero.
+   * A callback for when the marquee finishes scrolling and stops. Only calls if loop is non-zero.
    * Type: Function
    * Default: null
    */
   onFinish?: () => void;
   /**
-   * A callback for when the marquee finishes a cycle. Does not call if loop is zero.
+   * A callback for when the marquee finishes a loop. Does not call if maximum loops are reached (use onFinish instead).
    * Type: Function
    * Default: null
    */
