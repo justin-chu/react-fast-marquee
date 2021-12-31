@@ -83,5 +83,7 @@ export default App;
 | `gradient`      | `boolean`                   | `true`            | Whether to show the gradient or not                      |
 | `gradientColor` | `Array<number>` of length 3 | `[255, 255, 255]` | The rgb color of the gradient as an array of length 3    |
 | `gradientWidth` | `number` or `string`        | `200`             | The width of the gradient on either side                 |
+| `onFinish` | `Function` | `null` | A callback for when the marquee finishes scrolling and stops. Only calls if loop is non-zero.    |
+| `onCycleComplete` | `Function`        | `null`             | A callback for when the marquee finishes a loop. Does not call if maximum loops are reached (use onFinish instead).                 |
 | `children`      | `ReactNode`                 | `null`            | The children rendered inside the marquee                 |
 
