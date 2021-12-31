@@ -75,6 +75,18 @@ interface MarqueeProps {
    */
   gradientWidth?: number | string;
   /**
+   * A callback for when the marquee finishes scrolling and stops. Only calls if loop is non-zero.
+   * Type: Function
+   * Default: null
+   */
+  onFinish?: () => void;
+  /**
+   * A callback for when the marquee finishes a loop. Does not call if maximum loops are reached (use onFinish instead).
+   * Type: Function
+   * Default: null
+   */
+  onCycleComplete?: () => void;
+  /**
    * The children rendered inside the marquee
    * Type: ReactNode
    * Default: null
@@ -95,6 +107,8 @@ const Marquee: React.FC<MarqueeProps> = ({
   gradient = true,
   gradientColor = [255, 255, 255],
   gradientWidth = 200,
+  onFinish,
+  onCycleComplete,
   children,
 }) => {
   // React Hooks
@@ -170,6 +184,8 @@ const Marquee: React.FC<MarqueeProps> = ({
               ["--iteration-count" as string]: !!loop ? `${loop}` : "infinite",
             }}
             className="marquee"
+            onAnimationIteration={onCycleComplete}
+            onAnimationEnd={onFinish}
           >
             {children}
           </div>
