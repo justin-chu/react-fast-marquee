@@ -47,7 +47,7 @@
 
 .marquee {
   flex: 0 0 auto;
-  min-width: 100%;
+  min-width: max-content;
   z-index: 1;
   display: flex;
   flex-direction: row;
