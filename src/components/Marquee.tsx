@@ -112,35 +112,30 @@ const Marquee: React.FC<MarqueeProps> = ({
   children,
 }) => {
   // React Hooks
-  const [duration, setDuration] = useState(0);
+  const [containerWidth, setContainerWidth] = useState(0);
+  const [marqueeWidth, setMarqueeWidth] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
-  
+
   useEffect(() => {
-    if (!isMounted) return
+    if (!isMounted) return;
 
     const calculateWidth = () => {
       // Find width of container and width of marquee
-      if (!marqueeRef.current || !containerRef.current) return
-
-      const containerWidth = containerRef.current.getBoundingClientRect().width
-      const marqueeWidth = marqueeRef.current.getBoundingClientRect().width
-
-      if (marqueeWidth < containerWidth) {
-        setDuration(containerWidth / speed)
-      } else {
-        setDuration(marqueeWidth / speed)
+      if (marqueeRef.current && containerRef.current) {
+        setContainerWidth(containerRef.current.getBoundingClientRect().width);
+        setMarqueeWidth(marqueeRef.current.getBoundingClientRect().width);
       }
-    }
+    };
 
-    calculateWidth()
+    calculateWidth();
     // Rerender on window resize
-    window.addEventListener('resize', calculateWidth)
+    window.addEventListener("resize", calculateWidth);
     return () => {
-      window.removeEventListener('resize', calculateWidth)
-    }
-  }, [speed, isMounted])
+      window.removeEventListener("resize", calculateWidth);
+    };
+  }, [isMounted]);
 
   useEffect(() => {
     setIsMounted(true);
@@ -148,6 +143,12 @@ const Marquee: React.FC<MarqueeProps> = ({
 
   // Gradient color in an unfinished rgba format
   const rgbaGradientColor = `rgba(${gradientColor[0]}, ${gradientColor[1]}, ${gradientColor[2]}`;
+
+  // Animation duration
+  const duration =
+    marqueeWidth < containerWidth
+      ? containerWidth / speed
+      : marqueeWidth / speed;
 
   return (
     <Fragment>
