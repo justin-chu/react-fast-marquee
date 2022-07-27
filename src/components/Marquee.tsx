@@ -112,35 +112,35 @@ const Marquee: React.FC<MarqueeProps> = ({
   children,
 }) => {
   // React Hooks
-  const [containerWidth, setContainerWidth] = useState(0);
-  const [marqueeWidth, setMarqueeWidth] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
-
-  const calculateWidth = () => {
-    // Find width of container and width of marquee
-    if (marqueeRef.current && containerRef.current) {
-      setContainerWidth(containerRef.current.getBoundingClientRect().width);
-      setMarqueeWidth(marqueeRef.current.getBoundingClientRect().width);
-    }
-
-    if (marqueeWidth < containerWidth) {
-      setDuration(containerWidth / speed);
-    } else {
-      setDuration(marqueeWidth / speed);
-    }
-  };
-
+  
   useEffect(() => {
-    calculateWidth();
+    if (!isMounted) return
+
+    const calculateWidth = () => {
+      // Find width of container and width of marquee
+      if (!marqueeRef.current || !containerRef.current) return
+
+      const containerWidth = containerRef.current.getBoundingClientRect().width
+      const marqueeWidth = marqueeRef.current.getBoundingClientRect().width
+
+      if (marqueeWidth < containerWidth) {
+        setDuration(containerWidth / speed)
+      } else {
+        setDuration(marqueeWidth / speed)
+      }
+    }
+
+    calculateWidth()
     // Rerender on window resize
-    window.addEventListener("resize", calculateWidth);
+    window.addEventListener('resize', calculateWidth)
     return () => {
-      window.removeEventListener("resize", calculateWidth);
-    };
-  });
+      window.removeEventListener('resize', calculateWidth)
+    }
+  }, [speed, isMounted])
 
   useEffect(() => {
     setIsMounted(true);
