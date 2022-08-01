@@ -200,6 +200,7 @@ const Marquee: React.FC<MarqueeProps> = ({
               ["--iteration-count" as string]: !!loop ? `${loop}` : "infinite",
             }}
             className="marquee"
+            aria-hidden="true"
           >
             {children}
           </div>
