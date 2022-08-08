@@ -157,8 +157,8 @@ const Marquee: React.FC<MarqueeProps> = ({
           ref={containerRef}
           style={{
             ...style,
-            ["--pause-on-hover" as string]: pauseOnHover ? "paused" : "running",
-            ["--pause-on-click" as string]: pauseOnClick ? "paused" : "running",
+            ["--pause-on-hover" as string]: !play || pauseOnHover ? "paused" : "running",
+            ["--pause-on-click" as string]: !play || (pauseOnHover && !pauseOnClick) || pauseOnClick ? "paused" : "running",
           }}
           className={className + " marquee-container"}
         >
