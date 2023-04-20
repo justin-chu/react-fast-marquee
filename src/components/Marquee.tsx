@@ -118,17 +118,16 @@ const Marquee: React.FC<MarqueeProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
 
+  const calculateWidth = () => {
+    // Find width of container and width of marquee
+    if (marqueeRef.current && containerRef.current) {
+      setContainerWidth(containerRef.current.getBoundingClientRect().width);
+      setMarqueeWidth(marqueeRef.current.getBoundingClientRect().width);
+    }
+  };
+
   useEffect(() => {
     if (!isMounted) return;
-
-    const calculateWidth = () => {
-      // Find width of container and width of marquee
-      if (marqueeRef.current && containerRef.current) {
-        setContainerWidth(containerRef.current.getBoundingClientRect().width);
-        setMarqueeWidth(marqueeRef.current.getBoundingClientRect().width);
-      }
-    };
-
     calculateWidth();
     // Rerender on window resize
     window.addEventListener("resize", calculateWidth);
@@ -136,6 +135,11 @@ const Marquee: React.FC<MarqueeProps> = ({
       window.removeEventListener("resize", calculateWidth);
     };
   }, [isMounted]);
+
+  // Recalculate width when children change
+  useEffect(() => {
+    calculateWidth();
+  }, [children]);
 
   useEffect(() => {
     setIsMounted(true);
