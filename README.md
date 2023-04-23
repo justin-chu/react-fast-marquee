@@ -69,21 +69,21 @@ export default App;
 
 ## Props
 
-| Property        | Type                        | Default           | Description                                              |
-| :-------------- | :-------------------------- | :---------------- | :------------------------------------------------------- |
-| `style`         | `object`                    | `{}`              | Inline style for the container div                       |
-| `className`     | `string`                    | `""`              | Name of the css class to style the container div         |
-| `play`          | `boolean`                   | `true`            | Whether to play or pause the marquee                     |
-| `pauseOnHover`  | `boolean`                   | `false`           | Whether to pause the marquee when hovered                |
-| `pauseOnClick`  | `boolean`                   | `false`           | Whether to pause the marquee when clicked                |
-| `direction`     | `"left"` or `"right"`       | `"left"`          | The direction the marquee is sliding                     |
-| `speed`         | `number`                    | `20`              | Speed calculated as pixels/second                        |
-| `delay`         | `number`                    | `0`               | Duration to delay the animation after render, in seconds |
-| `loop`          | `number`                    | `0`               | The number of times the marquee should loop, 0 is equivalent to infinite         |
-| `gradient`      | `boolean`                   | `true`            | Whether to show the gradient or not                      |
-| `gradientColor` | `Array<number>` of length 3 | `[255, 255, 255]` | The rgb color of the gradient as an array of length 3    |
-| `gradientWidth` | `number` or `string`        | `200`             | The width of the gradient on either side                 |
-| `onFinish` | `Function` | `null` | A callback for when the marquee finishes scrolling and stops. Only calls if loop is non-zero.    |
-| `onCycleComplete` | `Function`        | `null`             | A callback for when the marquee finishes a loop. Does not call if maximum loops are reached (use onFinish instead).                 |
-| `children`      | `ReactNode`                 | `null`            | The children rendered inside the marquee                 |
-
+| Property          | Type                        | Default           | Description                                                                                                         |
+| :---------------- | :-------------------------- | :---------------- | :------------------------------------------------------------------------------------------------------------------ |
+| `style`           | `CSSProperties`                    | `{}`              | Inline style for the container div                                                                                  |
+| `className`       | `string`                    | `""`              | Name of the css class to style the container div                                                                    |
+| `autoFill`        | `boolean`                   | `true`           | Whether to automatically fill blank space in the marquee with copies of the children or not                                                                           |
+| `play`            | `boolean`                   | `true`            | Whether to play or pause the marquee                                                                                |
+| `pauseOnHover`    | `boolean`                   | `false`           | Whether to pause the marquee when hovered                                                                           |
+| `pauseOnClick`    | `boolean`                   | `false`           | Whether to pause the marquee when clicked                                                                           |
+|  `direction`       | `"left" \| "right"`       | `"left"`          | The direction the marquee is sliding                                                                                |
+| `speed`           | `number`                    | `100`              | Speed calculated as pixels/second                                                                                   |
+| `delay`           | `number`                    | `0`               | Duration to delay the animation after render, in seconds                                                            |
+| `loop`            | `number`                    | `0`               | The number of times the marquee should loop, 0 is equivalent to infinite                                            |
+| `gradient`        | `boolean`                   | `false`            | Whether to show the gradient or not                                                                                 |
+| `gradientColor`   | `Array<number>` of length 3 | `[255, 255, 255]` | The rgb color of the gradient as an array of length 3                                                               |
+| `gradientWidth`   | `number \| string`        | `200`             | The width of the gradient on either side                                                                            |
+| `onFinish`        | `{() => void}`                  | `null`            | A callback for when the marquee finishes scrolling and stops. Only calls if loop is non-zero.                       |
+| `onCycleComplete` | `{() => void}`                  | `null`            | A callback for when the marquee finishes a loop. Does not call if maximum loops are reached (use onFinish instead). |
+| `children`        | `ReactNode`                 | `null`            | The children rendered inside the marquee                                                                            |

@@ -1,110 +1,133 @@
-import React, { Fragment, useEffect, useState, useRef } from "react";
+import React, {
+  Fragment,
+  useEffect,
+  useState,
+  useRef,
+  useCallback,
+  useMemo,
+  ReactNode,
+  CSSProperties,
+  FC,
+} from "react";
 import "./Marquee.scss";
 
 interface MarqueeProps {
   /**
-   * Inline style for the container div
-   * Type: object
-   * Default: {}
+   * @description Inline style for the container div
+   * @type {CSSProperties}
+   * @default {}
    */
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   /**
-   * Class name to style the container div
-   * Type: string
-   * Default: ""
+   * @description Class name to style the container div
+   * @type {string}
+   * @default ""
    */
   className?: string;
   /**
-   * Whether to play or pause the marquee
-   * Type: boolean
-   * Default: true
+   * @description Whether to automatically fill blank space in the marquee with copies of the children or not
+   * @type {boolean}
+   * @default true
+   */
+  autoFill?: boolean;
+  /**
+   * @description Whether to play or pause the marquee
+   * @type {boolean}
+   * @default true
    */
   play?: boolean;
   /**
-   * Whether to pause the marquee when hovered
-   * Type: boolean
-   * Default: false
+   * @description Whether to pause the marquee when hovered
+   * @type {boolean}
+   * @default false
    */
   pauseOnHover?: boolean;
   /**
-   * Whether to pause the marquee when clicked
-   * Type: boolean
-   * Default: false
+   * @description Whether to pause the marquee when clicked
+   * @type {boolean}
+   * @default false
    */
   pauseOnClick?: boolean;
   /**
-   * The direction the marquee is sliding
-   * Type: "left" or "right"
-   * Default: "left"
+   * @description The direction the marquee is sliding
+   * @type {"left" | "right"}
+   * @default "left"
    */
   direction?: "left" | "right";
   /**
-   * Speed calculated as pixels/second
-   * Type: number
-   * Default: 20
+   * @description Speed calculated as pixels/second
+   * @type {number}
+   * @default 100
    */
   speed?: number;
   /**
-   * Duration to delay the animation after render, in seconds
-   * Type: number
-   * Default: 0
+   * @description Duration to delay the animation after render, in seconds
+   * @type {number}
+   * @default 0
    */
   delay?: number;
   /**
-   * The number of times the marquee should loop, 0 is equivalent to infinite
-   * Type: number
-   * Default: 0
+   * @description The number of times the marquee should loop, 0 is equivalent to infinite
+   * @type {number}
+   * @default 0
    */
   loop?: number;
   /**
-   * Whether to show the gradient or not
-   * Type: boolean
-   * Default: true
+   * @description Whether to show the gradient or not
+   * @type {boolean}
+   * @default false
    */
   gradient?: boolean;
   /**
-   * The rgb color of the gradient as an array of length 3
-   * Type: Array<number> of length 3
-   * Default: [255, 255, 255]
+   * @description The rgb color of the gradient as an array of length 3
+   * @type {Array<number>} of length 3
+   * @default [255, 255, 255]
    */
   gradientColor?: [number, number, number];
   /**
-   * The width of the gradient on either side
-   * Type: string
-   * Default: 200
+   * @description The width of the gradient on either side
+   * @type {number | string}
+   * @default 200
    */
   gradientWidth?: number | string;
   /**
-   * A callback for when the marquee finishes scrolling and stops. Only calls if loop is non-zero.
-   * Type: Function
-   * Default: null
+   * @description A callback for when the marquee finishes scrolling and stops. Only calls if loop is non-zero.
+   * @type {() => void}
+   * @default null
    */
   onFinish?: () => void;
   /**
-   * A callback for when the marquee finishes a loop. Does not call if maximum loops are reached (use onFinish instead).
-   * Type: Function
-   * Default: null
+   * @description A callback for when the marquee finishes a loop. Does not call if maximum loops are reached (use onFinish instead).
+   * @type {() => void}
+   * @default null
    */
   onCycleComplete?: () => void;
   /**
-   * The children rendered inside the marquee
-   * Type: ReactNode
-   * Default: null
+   * @description The children rendered inside the marquee
+   * @type {ReactNode}
+   * @default null
    */
-  children?: React.ReactNode;
+  children?: ReactNode;
 }
 
-const Marquee: React.FC<MarqueeProps> = ({
+const multiplyChildren = (multiplier: number, children: ReactNode) => {
+  return [
+    ...Array(Number.isFinite(multiplier) && multiplier >= 0 ? multiplier : 0),
+  ].map((_, i) => <Fragment key={i}>{children}</Fragment>);
+};
+
+const Marquee: FC<MarqueeProps> = ({
   style = {},
   className = "",
+  autoFill = true,
   play = true,
   pauseOnHover = false,
   pauseOnClick = false,
   direction = "left",
-  speed = 20,
+  speed = 100,
   delay = 0,
   loop = 0,
-  gradient = true,
+  gradient = false,
   gradientColor = [255, 255, 255],
   gradientWidth = 200,
   onFinish,
@@ -114,99 +137,131 @@ const Marquee: React.FC<MarqueeProps> = ({
   // React Hooks
   const [containerWidth, setContainerWidth] = useState(0);
   const [marqueeWidth, setMarqueeWidth] = useState(0);
+  const [multiplier, setMultiplier] = useState(1);
   const [isMounted, setIsMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
 
-  const calculateWidth = () => {
-    // Find width of container and width of marquee
+  // Calculate width of container and marquee and set multiplier
+  const calculateWidth = useCallback(() => {
     if (marqueeRef.current && containerRef.current) {
-      setContainerWidth(containerRef.current.getBoundingClientRect().width);
-      setMarqueeWidth(marqueeRef.current.getBoundingClientRect().width);
-    }
-  };
+      const containerWidth = containerRef.current.getBoundingClientRect().width;
+      const marqueeWidth = marqueeRef.current.getBoundingClientRect().width;
 
+      if (autoFill && containerWidth && marqueeWidth) {
+        setMultiplier(
+          marqueeWidth < containerWidth
+            ? Math.ceil(containerWidth / marqueeWidth)
+            : 1
+        );
+      } else {
+        setMultiplier(1);
+      }
+
+      setContainerWidth(containerWidth);
+      setMarqueeWidth(marqueeWidth);
+    }
+  }, [autoFill, marqueeRef]);
+
+  // Calculate width and multiplier on mount and on window resize
   useEffect(() => {
     if (!isMounted) return;
+
     calculateWidth();
-    // Rerender on window resize
-    window.addEventListener("resize", calculateWidth);
-    return () => {
-      window.removeEventListener("resize", calculateWidth);
-    };
-  }, [isMounted]);
+    if (marqueeRef.current) {
+      const resizeObserver = new ResizeObserver(() => calculateWidth());
+      resizeObserver.observe(marqueeRef.current);
+      return () => {
+        if (!resizeObserver) return;
+        resizeObserver.disconnect();
+      };
+    }
+  }, [calculateWidth, isMounted]);
 
   // Recalculate width when children change
   useEffect(() => {
     calculateWidth();
-  }, [children]);
+  }, [calculateWidth, children]);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
+  // Animation duration
+  const duration = useMemo(() => {
+    if (autoFill) {
+      return (marqueeWidth * multiplier) / speed;
+    } else {
+      return marqueeWidth < containerWidth
+        ? containerWidth / speed
+        : marqueeWidth / speed;
+    }
+  }, [autoFill, containerWidth, marqueeWidth, multiplier, speed]);
+
   // Gradient color in an unfinished rgba format
   const rgbaGradientColor = `rgba(${gradientColor[0]}, ${gradientColor[1]}, ${gradientColor[2]}`;
 
-  // Animation duration
-  const duration =
-    marqueeWidth < containerWidth
-      ? containerWidth / speed
-      : marqueeWidth / speed;
+  const containerStyle = useMemo(
+    () => ({
+      ...style,
+      ["--pause-on-hover" as string]:
+        !play || pauseOnHover ? "paused" : "running",
+      ["--pause-on-click" as string]:
+        !play || (pauseOnHover && !pauseOnClick) || pauseOnClick
+          ? "paused"
+          : "running",
+    }),
+    [style, play, pauseOnHover, pauseOnClick]
+  );
+
+  const gradientStyle = useMemo(
+    () => ({
+      ["--gradient-color" as string]: `${rgbaGradientColor}, 1), ${rgbaGradientColor}, 0)`,
+      ["--gradient-width" as string]:
+        typeof gradientWidth === "number"
+          ? `${gradientWidth}px`
+          : gradientWidth,
+    }),
+    [rgbaGradientColor, gradientWidth]
+  );
+
+  const marqueeStyle = useMemo(
+    () => ({
+      ["--play" as string]: play ? "running" : "paused",
+      ["--direction" as string]: direction === "left" ? "normal" : "reverse",
+      ["--duration" as string]: `${duration}s`,
+      ["--delay" as string]: `${delay}s`,
+      ["--iteration-count" as string]: !!loop ? `${loop}` : "infinite",
+      ["--min-width" as string]: autoFill ? `auto` : "100%",
+    }),
+    [play, direction, duration, delay, loop, autoFill]
+  );
 
   return (
     <Fragment>
       {!isMounted ? null : (
         <div
           ref={containerRef}
-          style={{
-            ...style,
-            ["--pause-on-hover" as string]: !play || pauseOnHover ? "paused" : "running",
-            ["--pause-on-click" as string]: !play || (pauseOnHover && !pauseOnClick) || pauseOnClick ? "paused" : "running",
-          }}
+          style={containerStyle}
           className={className + " marquee-container"}
         >
-          {gradient && (
-            <div
-              style={{
-                ["--gradient-color" as string]: `${rgbaGradientColor}, 1), ${rgbaGradientColor}, 0)`,
-                ["--gradient-width" as string]:
-                  typeof gradientWidth === "number"
-                    ? `${gradientWidth}px`
-                    : gradientWidth,
-              }}
-              className="overlay"
-            />
-          )}
+          {gradient && <div style={gradientStyle} className="overlay" />}
           <div
-            ref={marqueeRef}
-            style={{
-              ["--play" as string]: play ? "running" : "paused",
-              ["--direction" as string]:
-                direction === "left" ? "normal" : "reverse",
-              ["--duration" as string]: `${duration}s`,
-              ["--delay" as string]: `${delay}s`,
-              ["--iteration-count" as string]: !!loop ? `${loop}` : "infinite",
-            }}
             className="marquee"
+            style={marqueeStyle}
             onAnimationIteration={onCycleComplete}
             onAnimationEnd={onFinish}
           >
-            {children}
+            <div
+              className="children-container"
+              ref={marqueeRef as React.RefObject<HTMLDivElement>}
+            >
+              {children}
+            </div>
+            {multiplyChildren(multiplier - 1, children)}
           </div>
-          <div
-            style={{
-              ["--play" as string]: play ? "running" : "paused",
-              ["--direction" as string]:
-                direction === "left" ? "normal" : "reverse",
-              ["--duration" as string]: `${duration}s`,
-              ["--delay" as string]: `${delay}s`,
-              ["--iteration-count" as string]: !!loop ? `${loop}` : "infinite",
-            }}
-            className="marquee"
-            aria-hidden="true"
-          >
-            {children}
+          <div className="marquee" style={marqueeStyle}>
+            {multiplyChildren(multiplier, children)}
           </div>
         </div>
       )}

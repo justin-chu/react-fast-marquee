@@ -47,7 +47,7 @@
 
 .marquee {
   flex: 0 0 auto;
-  min-width: 100%;
+  min-width: var(--min-width);
   z-index: 1;
   display: flex;
   flex-direction: row;
@@ -65,4 +65,9 @@
       transform: translateX(-100%);
     }
   }
+}
+
+.children-container {
+  flex: 0 0 auto;
+  min-width: auto;
 }
