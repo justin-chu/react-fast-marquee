@@ -168,8 +168,9 @@ const Marquee: FC<MarqueeProps> = ({
     if (!isMounted) return;
 
     calculateWidth();
-    if (marqueeRef.current) {
+    if (marqueeRef.current && containerRef.current) {
       const resizeObserver = new ResizeObserver(() => calculateWidth());
+      resizeObserver.observe(containerRef.current);
       resizeObserver.observe(marqueeRef.current);
       return () => {
         if (!resizeObserver) return;
