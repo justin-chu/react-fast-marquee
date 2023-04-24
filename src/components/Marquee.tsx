@@ -8,11 +8,14 @@ import React, {
   ReactNode,
   CSSProperties,
   FC,
+  forwardRef,
   Children,
+  MutableRefObject,
+  RefAttributes,
 } from "react";
 import "./Marquee.scss";
 
-interface MarqueeProps {
+type MarqueeProps = {
   /**
    * @description Inline style for the container div
    * @type {CSSProperties}
@@ -109,32 +112,36 @@ interface MarqueeProps {
    * @default null
    */
   children?: ReactNode;
-}
+} & RefAttributes<HTMLDivElement>;
 
-const Marquee: FC<MarqueeProps> = ({
-  style = {},
-  className = "",
-  autoFill = true,
-  play = true,
-  pauseOnHover = false,
-  pauseOnClick = false,
-  direction = "left",
-  speed = 100,
-  delay = 0,
-  loop = 0,
-  gradient = false,
-  gradientColor = [255, 255, 255],
-  gradientWidth = 200,
-  onFinish,
-  onCycleComplete,
-  children,
-}) => {
+const Marquee: FC<MarqueeProps> = forwardRef(function Marquee(
+  {
+    style = {},
+    className = "",
+    autoFill = true,
+    play = true,
+    pauseOnHover = false,
+    pauseOnClick = false,
+    direction = "left",
+    speed = 100,
+    delay = 0,
+    loop = 0,
+    gradient = false,
+    gradientColor = [255, 255, 255],
+    gradientWidth = 200,
+    onFinish,
+    onCycleComplete,
+    children,
+  },
+  ref
+) {
   // React Hooks
   const [containerWidth, setContainerWidth] = useState(0);
   const [marqueeWidth, setMarqueeWidth] = useState(0);
   const [multiplier, setMultiplier] = useState(1);
   const [isMounted, setIsMounted] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const containerRef = (ref as MutableRefObject<HTMLDivElement>) || rootRef;
   const marqueeRef = useRef<HTMLDivElement>(null);
 
   // Calculate width of container and marquee and set multiplier
@@ -164,7 +171,7 @@ const Marquee: FC<MarqueeProps> = ({
       setContainerWidth(containerWidth);
       setMarqueeWidth(marqueeWidth);
     }
-  }, [autoFill, direction]);
+  }, [autoFill, containerRef, direction]);
 
   // Calculate width and multiplier on mount and on window resize
   useEffect(() => {
@@ -180,7 +187,7 @@ const Marquee: FC<MarqueeProps> = ({
         resizeObserver.disconnect();
       };
     }
-  }, [calculateWidth, isMounted]);
+  }, [calculateWidth, containerRef, isMounted]);
 
   // Recalculate width when children change
   useEffect(() => {
@@ -215,13 +222,7 @@ const Marquee: FC<MarqueeProps> = ({
           ? "paused"
           : "running",
       ["--width" as string]:
-        direction === "up" || direction === "down"
-          ? `100vh` //`${containerWidth}px`
-          : "100%",
-      ["--height" as string]:
-        direction === "up" || direction === "down"
-          ? "200px" //`${marqueeWidth}px`
-          : "auto",
+        direction === "up" || direction === "down" ? `100vh` : "100%",
       ["--transform" as string]:
         direction === "up"
           ? "rotate(-90deg)"
@@ -229,15 +230,7 @@ const Marquee: FC<MarqueeProps> = ({
           ? "rotate(90deg)"
           : "none",
     }),
-    [
-      style,
-      play,
-      pauseOnHover,
-      pauseOnClick,
-      direction,
-      containerWidth,
-      marqueeWidth,
-    ]
+    [style, play, pauseOnHover, pauseOnClick, direction]
   );
 
   const gradientStyle = useMemo(
@@ -301,7 +294,7 @@ const Marquee: FC<MarqueeProps> = ({
     <div
       ref={containerRef}
       style={containerStyle}
-      className={className + " marquee-container"}
+      className={"marquee-container " + className}
     >
       {gradient && <div style={gradientStyle} className="overlay" />}
       <div
@@ -326,6 +319,6 @@ const Marquee: FC<MarqueeProps> = ({
       </div>
     </div>
   );
-};
+});
 
 export default Marquee;

@@ -3,7 +3,16 @@ import { shallow, mount } from "enzyme";
 import Marquee from "../src/components/Marquee";
 import ReactDOM from "react-dom";
 
+class ResizeObserver {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  observe() {}
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  unobserve() {}
+}
+
 describe("Marquee", () => {
+  window.ResizeObserver = ResizeObserver;
+
   test("renders without crashing", () => {
     const div = document.createElement("div");
     ReactDOM.render(
