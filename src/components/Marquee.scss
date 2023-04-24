@@ -3,7 +3,8 @@
   display: flex !important;
   flex-direction: row !important;
   position: relative;
-  width: 100%;
+  width: var(--width);
+  transform: var(--transform);
 
   &:hover div {
     animation-play-state: var(--pause-on-hover);
@@ -67,7 +68,13 @@
   }
 }
 
-.children-container {
+.initial-child-container {
   flex: 0 0 auto;
+  display: flex;
   min-width: auto;
+  flex-direction: row;
+}
+
+.child {
+  transform: var(--transform);
 }

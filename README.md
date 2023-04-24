@@ -77,7 +77,7 @@ export default App;
 | `play`            | `boolean`                   | `true`            | Whether to play or pause the marquee                                                                                |
 | `pauseOnHover`    | `boolean`                   | `false`           | Whether to pause the marquee when hovered                                                                           |
 | `pauseOnClick`    | `boolean`                   | `false`           | Whether to pause the marquee when clicked                                                                           |
-|  `direction`       | `"left" \| "right"`       | `"left"`          | The direction the marquee is sliding                                                                                |
+|  `direction`       | `"left" \| "right"\| "up"\| "down"`       | `"left"`          | The direction the marquee slides  <br /><br /> **Warning:** Vertical marquees are currently experimental and may be buggy. Please swap the values of the marquee's height and width when setting them                                |
 | `speed`           | `number`                    | `100`              | Speed calculated as pixels/second                                                                                   |
 | `delay`           | `number`                    | `0`               | Duration to delay the animation after render, in seconds                                                            |
 | `loop`            | `number`                    | `0`               | The number of times the marquee should loop, 0 is equivalent to infinite                                            |

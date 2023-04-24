@@ -68,6 +68,7 @@
     "@types/jest": "^26.0.20",
     "@types/react": "^16.9.52",
     "@types/react-dom": "^16.9.8",
+    "@types/resize-observer-browser": "^0.1.7",
     "@typescript-eslint/eslint-plugin": "^4.4.1",
     "@typescript-eslint/parser": "^4.4.1",
     "babel-core": "^6.26.3",
