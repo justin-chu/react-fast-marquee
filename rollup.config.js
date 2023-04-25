@@ -10,7 +10,8 @@ export default {
       format: 'cjs',
       exports: 'named',
       sourcemap: true,
-      strict: false
+      strict: false,
+      banner: `"use client"`,
     }
   ],
   plugins: [
