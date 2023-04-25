@@ -1,6 +1,6 @@
 # React Fast Marquee
 
-[React Fast Marquee](https://www.react-fast-marquee.com) is a lightweight React component that utilizes the power of CSS animations to create silky smooth marquees.
+[React Fast Marquee](https://www.react-fast-marquee.com) is a lightweight React component that harnesses the power of CSS animations to create silky smooth marquees.
 
 [![npm](https://img.shields.io/npm/v/react-fast-marquee.svg)](https://www.npmjs.com/package/react-fast-marquee)
 [![npm downloads](https://img.shields.io/npm/dt/react-fast-marquee.svg)](https://www.npmjs.com/package/react-fast-marquee)
@@ -78,7 +78,7 @@ export default App;
 | `pauseOnHover`    | `boolean`                   | `false`           | Whether to pause the marquee when hovered                                                                           |
 | `pauseOnClick`    | `boolean`                   | `false`           | Whether to pause the marquee when clicked                                                                           |
 |  `direction`       | `"left" \| "right"\| "up"\| "down"`       | `"left"`          | The direction the marquee slides  <br /><br /> **Warning:** Vertical marquees are currently experimental and may be buggy. Please swap the values of the marquee's height and width when setting them                                |
-| `speed`           | `number`                    | `100`              | Speed calculated as pixels/second                                                                                   |
+| `speed`           | `number`                    | `50`              | Speed calculated as pixels/second                                                                                   |
 | `delay`           | `number`                    | `0`               | Duration to delay the animation after render, in seconds                                                            |
 | `loop`            | `number`                    | `0`               | The number of times the marquee should loop, 0 is equivalent to infinite                                            |
 | `gradient`        | `boolean`                   | `false`            | Whether to show the gradient or not                                                                                 |

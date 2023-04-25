@@ -61,7 +61,7 @@ type MarqueeProps = {
   /**
    * @description Speed calculated as pixels/second
    * @type {number}
-   * @default 100
+   * @default 50
    */
   speed?: number;
   /**
@@ -123,7 +123,7 @@ const Marquee: FC<MarqueeProps> = forwardRef(function Marquee(
     pauseOnHover = false,
     pauseOnClick = false,
     direction = "left",
-    speed = 100,
+    speed = 50,
     delay = 0,
     loop = 0,
     gradient = false,
