@@ -31,7 +31,7 @@ type MarqueeProps = {
   /**
    * @description Whether to automatically fill blank space in the marquee with copies of the children or not
    * @type {boolean}
-   * @default true
+   * @default false
    */
   autoFill?: boolean;
   /**
@@ -118,7 +118,7 @@ const Marquee: FC<MarqueeProps> = forwardRef(function Marquee(
   {
     style = {},
     className = "",
-    autoFill = true,
+    autoFill = false,
     play = true,
     pauseOnHover = false,
     pauseOnClick = false,
