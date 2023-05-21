@@ -107,6 +107,12 @@ type MarqueeProps = {
    */
   onCycleComplete?: () => void;
   /**
+   * @description: A callback function that is invoked once the marquee has finished mounting. It can be utilized to recalculate the page size, if necessary.
+   * @type {() => void}
+   * @default null
+   */
+  onMount?: () => void;
+  /**
    * @description The children rendered inside the marquee
    * @type {ReactNode}
    * @default null
@@ -131,6 +137,7 @@ const Marquee: FC<MarqueeProps> = forwardRef(function Marquee(
     gradientWidth = 200,
     onFinish,
     onCycleComplete,
+    onMount,
     children,
   },
   ref
@@ -198,6 +205,13 @@ const Marquee: FC<MarqueeProps> = forwardRef(function Marquee(
     setIsMounted(true);
   }, []);
 
+  // Runs th onMount callback, if it is a function, when Marquee is mounted.
+  useEffect(() => {
+    if (typeof onMount === "function") {
+      onMount();
+    }
+  }, []);
+
   // Animation duration
   const duration = useMemo(() => {
     if (autoFill) {
@@ -227,8 +241,8 @@ const Marquee: FC<MarqueeProps> = forwardRef(function Marquee(
         direction === "up"
           ? "rotate(-90deg)"
           : direction === "down"
-          ? "rotate(90deg)"
-          : "none",
+            ? "rotate(90deg)"
+            : "none",
     }),
     [style, play, pauseOnHover, pauseOnClick, direction]
   );
@@ -262,8 +276,8 @@ const Marquee: FC<MarqueeProps> = forwardRef(function Marquee(
         direction === "up"
           ? "rotate(90deg)"
           : direction === "down"
-          ? "rotate(-90deg)"
-          : "none",
+            ? "rotate(-90deg)"
+            : "none",
     }),
     [direction]
   );
