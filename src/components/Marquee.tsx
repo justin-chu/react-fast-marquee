@@ -241,8 +241,8 @@ const Marquee: FC<MarqueeProps> = forwardRef(function Marquee(
         direction === "up"
           ? "rotate(-90deg)"
           : direction === "down"
-            ? "rotate(90deg)"
-            : "none",
+          ? "rotate(90deg)"
+          : "none",
     }),
     [style, play, pauseOnHover, pauseOnClick, direction]
   );
@@ -276,8 +276,8 @@ const Marquee: FC<MarqueeProps> = forwardRef(function Marquee(
         direction === "up"
           ? "rotate(90deg)"
           : direction === "down"
-            ? "rotate(-90deg)"
-            : "none",
+          ? "rotate(-90deg)"
+          : "none",
     }),
     [direction]
   );
