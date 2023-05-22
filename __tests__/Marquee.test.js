@@ -113,4 +113,26 @@ describe("Marquee", () => {
     );
     expect(component.props().gradientWidth).toBe(100);
   });
+
+  test("should have a callback if passed", () => {
+    const component = mount(
+      <Marquee onMount={() => {}}>
+        <div>testing</div>
+      </Marquee>
+    );
+    expect(typeof component.props().onMount).toBe("function");
+  });
+
+  test("should call its onMount callback after mounting if it exists and is a function", () => {
+    const arr = [];
+    const runAfterMounting = () => {
+      arr.push(1, 2, 3);
+    };
+    mount(
+      <Marquee onMount={runAfterMounting}>
+        <div>testing</div>
+      </Marquee>
+    );
+    expect(arr.length).toBe(3);
+  });
 });
