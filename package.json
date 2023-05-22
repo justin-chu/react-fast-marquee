@@ -1,6 +1,6 @@
 {
   "name": "react-fast-marquee",
-  "version": "1.5.2",
+  "version": "1.6.0",
   "description": "A lightweight React component that utilizes the power of CSS animations to create silky smooth marquees.",
   "main": "dist/index.js",
   "scripts": {
