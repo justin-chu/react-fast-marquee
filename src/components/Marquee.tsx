@@ -205,7 +205,7 @@ const Marquee: FC<MarqueeProps> = forwardRef(function Marquee(
     setIsMounted(true);
   }, []);
 
-  // Runs th onMount callback, if it is a function, when Marquee is mounted.
+  // Runs the onMount callback, if it is a function, when Marquee is mounted.
   useEffect(() => {
     if (typeof onMount === "function") {
       onMount();
