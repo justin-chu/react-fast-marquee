@@ -241,8 +241,8 @@ const Marquee: FC<MarqueeProps> = forwardRef(function Marquee(
         direction === "up"
           ? "rotate(-90deg)"
           : direction === "down"
-          ? "rotate(90deg)"
-          : "none",
+            ? "rotate(90deg)"
+            : "none",
     }),
     [style, play, pauseOnHover, pauseOnClick, direction]
   );
@@ -276,8 +276,8 @@ const Marquee: FC<MarqueeProps> = forwardRef(function Marquee(
         direction === "up"
           ? "rotate(90deg)"
           : direction === "down"
-          ? "rotate(-90deg)"
-          : "none",
+            ? "rotate(-90deg)"
+            : "none",
     }),
     [direction]
   );
@@ -310,7 +310,7 @@ const Marquee: FC<MarqueeProps> = forwardRef(function Marquee(
       style={containerStyle}
       className={"marquee-container " + className}
     >
-      {gradient && <div style={gradientStyle} className="overlay" />}
+      {gradient && <div style={gradientStyle} className="overlay_marquee" />}
       <div
         className="marquee"
         style={marqueeStyle}
