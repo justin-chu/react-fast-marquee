@@ -83,11 +83,11 @@ type MarqueeProps = {
    */
   gradient?: boolean;
   /**
-   * @description The rgb color of the gradient as an array of length 3
-   * @type {Array<number>} of length 3
-   * @default [255, 255, 255]
+   * @description The color of the gradient
+   * @type {string}
+   * @default "white"
    */
-  gradientColor?: [number, number, number];
+  gradientColor?: string;
   /**
    * @description The width of the gradient on either side
    * @type {number | string}
@@ -133,7 +133,7 @@ const Marquee: FC<MarqueeProps> = forwardRef(function Marquee(
     delay = 0,
     loop = 0,
     gradient = false,
-    gradientColor = [255, 255, 255],
+    gradientColor = "white",
     gradientWidth = 200,
     onFinish,
     onCycleComplete,
@@ -223,9 +223,6 @@ const Marquee: FC<MarqueeProps> = forwardRef(function Marquee(
     }
   }, [autoFill, containerWidth, marqueeWidth, multiplier, speed]);
 
-  // Gradient color in an unfinished rgba format
-  const rgbaGradientColor = `rgba(${gradientColor[0]}, ${gradientColor[1]}, ${gradientColor[2]}`;
-
   const containerStyle = useMemo(
     () => ({
       ...style,
@@ -249,13 +246,13 @@ const Marquee: FC<MarqueeProps> = forwardRef(function Marquee(
 
   const gradientStyle = useMemo(
     () => ({
-      ["--gradient-color" as string]: `${rgbaGradientColor}, 1), ${rgbaGradientColor}, 0)`,
+      ["--gradient-color" as string]: gradientColor,
       ["--gradient-width" as string]:
         typeof gradientWidth === "number"
           ? `${gradientWidth}px`
           : gradientWidth,
     }),
-    [rgbaGradientColor, gradientWidth]
+    [gradientColor, gradientWidth]
   );
 
   const marqueeStyle = useMemo(
@@ -293,7 +290,7 @@ const Marquee: FC<MarqueeProps> = forwardRef(function Marquee(
         <Fragment key={i}>
           {Children.map(children, (child) => {
             return (
-              <div style={childStyle} className="child">
+              <div style={childStyle} className="rfm-child">
                 {child}
               </div>
             );
@@ -308,19 +305,19 @@ const Marquee: FC<MarqueeProps> = forwardRef(function Marquee(
     <div
       ref={containerRef}
       style={containerStyle}
-      className={"marquee-container " + className}
+      className={"rfm-marquee-container " + className}
     >
-      {gradient && <div style={gradientStyle} className="overlay" />}
+      {gradient && <div style={gradientStyle} className="rfm-overlay" />}
       <div
-        className="marquee"
+        className="rfm-marquee"
         style={marqueeStyle}
         onAnimationIteration={onCycleComplete}
         onAnimationEnd={onFinish}
       >
-        <div className="initial-child-container" ref={marqueeRef}>
+        <div className="rfm-initial-child-container" ref={marqueeRef}>
           {Children.map(children, (child) => {
             return (
-              <div style={childStyle} className="child">
+              <div style={childStyle} className="rfm-child">
                 {child}
               </div>
             );
@@ -328,7 +325,7 @@ const Marquee: FC<MarqueeProps> = forwardRef(function Marquee(
         </div>
         {multiplyChildren(multiplier - 1)}
       </div>
-      <div className="marquee" style={marqueeStyle}>
+      <div className="rfm-marquee" style={marqueeStyle}>
         {multiplyChildren(multiplier)}
       </div>
     </div>
