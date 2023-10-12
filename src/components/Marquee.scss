@@ -32,6 +32,8 @@
     position: absolute;
     width: var(--gradient-width);
     z-index: 2;
+    pointer-events: none;
+    touch-action: none;
   }
 
   &::after {
