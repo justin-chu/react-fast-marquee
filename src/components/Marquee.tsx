@@ -15,7 +15,7 @@ import React, {
 } from "react";
 import "./Marquee.scss";
 
-type MarqueeProps = {
+export type MarqueeProps = {
   /**
    * @description Inline style for the container div
    * @type {CSSProperties}
