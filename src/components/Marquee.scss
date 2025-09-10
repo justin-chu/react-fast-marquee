@@ -60,6 +60,7 @@
   animation-delay: var(--delay);
   animation-direction: var(--direction);
 
+  /* Keyframes animation for LTR */
   @keyframes scroll {
     0% {
       transform: translateX(0%);
@@ -68,6 +69,25 @@
       transform: translateX(-100%);
     }
   }
+
+  /* Keyframes animation for RTL */
+  @keyframes scroll-rtl {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}
+
+/* Switch animation automatically with CSS only based on direction attribute */
+:dir(rtl) .rfm-marquee {
+  animation-name: scroll-rtl;
+}
+
+:dir(ltr) .rfm-marquee {
+  animation-name: scroll;
 }
 
 .rfm-initial-child-container {
